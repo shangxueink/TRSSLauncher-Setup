@@ -206,17 +206,3 @@ if __name__ == "__main__":
     main()
 
 
-#0.1.4  优化run command的指令的命令提示
-#0.1.3  优化【7】自定义指令的命令提示
-#0.1.2  增加合适的 ASCII艺术字打印
-#0.1.1  优化对根目录的判断，支持根目录名称为【Yunzai】，【Yunzai-Bot】，并且【Yunzai】优先
-#0.1.0  优化Miao迁移到trss的判断。必须要是Miao才能迁移
-#0.0.9  增加7,8选项：自定义终端指令和 Miao迁移的trss.js
-#0.0.8  插件安装使用gitee版本 
-#0.0.7  pyinstaller --uac-admin  main.py   --onefile
-#0.0.6  设置npm镜像源
-#0.0.5  取消检查pnpm，而是每次都【安装 pnpm 和 依赖】
-#0.0.4  检查pnpm
-#0.0.3  完善菜单（redis单独下载）
-#0.0.2  完善node版本检测
-#0.0.1  实现基本功能
