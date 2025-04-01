@@ -29,7 +29,7 @@ jobs:
         run: pyinstaller --uac-admin TRSSInstaller-win.py --onefile
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v3.1.2  # 使用更具体的版本
+        uses: actions/upload-artifact@v4
         with:
           name: TRSSInstaller
           path: dist/TRSSInstaller-win.exe
@@ -42,7 +42,7 @@ jobs:
 
     steps:
       - name: Download Artifact
-        uses: actions/download-artifact@v3.1.2  # 使用更具体的版本
+        uses: actions/download-artifact@v4
         with:
           name: TRSSInstaller
 
