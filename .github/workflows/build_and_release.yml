@@ -78,6 +78,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: TRSSInstaller.exe
+          asset_path: dist/TRSSInstaller.exe  # 修改这里
           asset_name: TRSSInstaller.exe
           asset_content_type: application/vnd.microsoft.portable-executable
