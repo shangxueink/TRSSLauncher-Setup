@@ -1,0 +1,84 @@
+name: Build and Release TRSSInstaller
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch: # 允许手动触发
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'  # 或者指定具体的版本，例如 '3.9'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyinstaller
+          pip install -r environment.txt
+
+      - name: Build with PyInstaller
+        run: pyinstaller --uac-admin TRSSInstaller-win.py --onefile
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: TRSSInstaller
+          path: dist/TRSSInstaller-win.exe
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # 允许创建和更新 release
+
+    steps:
+      - name: Download Artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: TRSSInstaller
+
+      - name: Get current date
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+
+      - name: Delete previous releases
+        uses: dev-drprasad/delete-older-releases@v0.4.0
+        with:
+          keep_latest: 0
+          delete_tags: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.date.outputs.date }}
+          release_name: TRSSInstaller ${{ steps.date.outputs.date }}
+          body: |
+            自动构建的 TRSSInstaller 安装包。
+          draft: false
+          prerelease: false
+
+      - name: Upload Release Asset
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: TRSSInstaller.exe
+          asset_name: TRSSInstaller.exe
+          asset_content_type: application/vnd.microsoft.portable-executable
+
