@@ -45,6 +45,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: TRSSInstaller
+          path: artifact_download  # 指定下载路径
 
       - name: Get current date
         id: date
@@ -78,6 +79,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: dist/TRSSInstaller.exe  # 修改这里
+          asset_path: artifact_download/TRSSInstaller-win.exe  # 修改 asset_path
           asset_name: TRSSInstaller.exe
           asset_content_type: application/vnd.microsoft.portable-executable
