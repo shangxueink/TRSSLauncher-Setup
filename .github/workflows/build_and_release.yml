@@ -51,7 +51,7 @@ jobs:
         run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
 
       - name: Delete previous releases
-        uses: dev-drprasad/delete-older-releases@v0.4.0
+        uses: dev-drprasad/delete-older-releases@v0.3.4
         with:
           keep_latest: 0
           delete_tags: true
