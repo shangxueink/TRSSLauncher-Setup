@@ -1,0 +1,33 @@
+version: '3'
+
+vars:
+  BINARY_NAME: trss_manager
+  BUILD_DIR: ./bin
+
+tasks:
+  default:
+    desc: 显示所有可用任务
+    cmds:
+      - task --list
+    silent: true
+
+  start:
+    desc: 运行TRSS启动器应用程序
+    cmds:
+      - go run ./src/main.go
+
+  build:
+    desc: 构建Windows可执行文件
+    cmds:
+      - go build -o {{.BUILD_DIR}}/{{.BINARY_NAME}}.exe ./src
+    sources:
+      - src/**/*.go
+      - go.mod
+      - go.sum
+    generates:
+      - bin/windows-{{.BINARY_NAME}}.exe
+
+  install:
+    desc: 安装项目依赖
+    cmds:
+      - go mod download
