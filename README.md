@@ -2,6 +2,8 @@
 
 TRSS安装器是一个基于Yunzai框架的TRSS分支的安装脚本，专注于在Windows平台自动化安装和配置TRSS环境。
 
+> 其他平台的TRSS安装方法 请参考：https://trss.me/
+
 本安装器支持从Miao分支迁移至TRSS分支，并提供了一系列便捷的操作选项。
 
 ## 功能
@@ -71,11 +73,8 @@ task
 # 运行源码
 task start
 
-# 构建Windows版本
+# 构建Windows可执行文件
 task build
-
-# 构建所有平台版本
-task build-all
 ```
 
 ## 注意事项
