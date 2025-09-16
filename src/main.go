@@ -293,7 +293,8 @@ func gitCloneTrss() {
 func installPlugins() {
 	executeCustomCommand("git clone --depth 1 https://gitee.com/TimeRainStarSky/TRSS-Plugin/ plugins/TRSS-Plugin", false)
 	executeCustomCommand("git clone --depth 1 https://gitee.com/TimeRainStarSky/Yunzai-genshin plugins/genshin", false)
-	executeCustomCommand("git clone --depth 1 https://github.com/yoimiya-kokomi/miao-plugin plugins/miao-plugin", false)
+	executeCustomCommand("git clone --depth 1 https://gitcode.com/TimeRainStarSky/miao-plugin.git plugins/miao-plugin", false)
+	executeCustomCommand("git -C plugins/miao-plugin remote set-url origin https://gitcode.com/TimeRainStarSky/miao-plugin.git", false)
 }
 
 // 安装pnpm和依赖
